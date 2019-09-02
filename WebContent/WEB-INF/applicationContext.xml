@@ -37,7 +37,10 @@
 	<context:annotation-config /> <!-- Afin d'utiliser les annotations : @Service @Repository @Autowired -->
 	<context:component-scan base-package="com.inti.dao.impl" />
 	<context:component-scan base-package="com.inti.service.impl" />
+	<context:component-scan base-package="com.inti.entities" />
 	<context:component-scan base-package="com.inti.controller" />
+	<context:component-scan base-package="com.inti.config" />
+
 	<!-- Déclarer le gestionnaire de transactions pour permettre une utilisation 
 		de l'annotation @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -47,18 +50,5 @@
 	</beans:bean>
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
-	<beans:bean id="viewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<beans:property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<beans:property name="prefix" value="/WEB-INF/jsp/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- Définir la taille maximale de l'image -->
-		<beans:property name="maxUploadSize" value="10000000" />
-	</beans:bean>
-
 
 </beans:beans>

@@ -30,14 +30,6 @@ public class Document implements Serializable {
 	public Document() {
 	}
 
-	public Document(Long idDocument, Date dateCreation, String nom, String description, Affaire affaire) {
-		super();
-		this.idDocument = idDocument;
-		this.dateCreation = dateCreation;
-		this.nom = nom;
-		this.description = description;
-	}
-
 	public Long getIdDocument() {
 		return idDocument;
 	}
@@ -76,12 +68,6 @@ public class Document implements Serializable {
 
 	public void setAffaire(Affaire affaire) {
 		this.affaire = affaire;
-	}
-
-	@Override
-	public String toString() {
-		return "Document [idDocument=" + idDocument + ", dateCreation=" + dateCreation + ", nom=" + nom
-				+ ", description=" + description + "]";
 	}
 
 }

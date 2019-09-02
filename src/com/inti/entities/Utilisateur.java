@@ -1,16 +1,20 @@
 package com.inti.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,25 +27,26 @@ public class Utilisateur implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUtilisateur;
-	@Temporal(TemporalType.DATE)
 	private String email;
 	private String nomUtilisateur;
 	private String prenomUtilisateur;
-	@ManyToMany(mappedBy = "utilisateur", fetch = FetchType.EAGER)
-	private Set<Role> roles = new HashSet<>();
-	@ManyToOne
-	private Tache tache;
+	@Column(unique = true)
+	private String username;
+	private String password;
+	private boolean enabled = true;
+	@Temporal(TemporalType.DATE)
+	private Date dateNaissance;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "profil", joinColumns = {
+			@JoinColumn(name = "id_utilisateur", referencedColumnName = "idUtilisateur") }, inverseJoinColumns = {
+					@JoinColumn(name = "id_role", table = "role", referencedColumnName = "idRole") })
+	private Set<Role> listRole = new HashSet<Role>();
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.EAGER)
+	private Set<Tache> taches = new HashSet<Tache>();
 
 	public Utilisateur() {
 	}
 
-	public Utilisateur(Long idUtilisateur, String email, String nomUtilisateur, String prenomUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
-		this.email = email;
-		this.nomUtilisateur = nomUtilisateur;
-		this.prenomUtilisateur = prenomUtilisateur;
-	}
-	
 	public Long getIdUtilisateur() {
 		return idUtilisateur;
 	}
@@ -74,26 +79,52 @@ public class Utilisateur implements Serializable {
 		this.prenomUtilisateur = prenomUtilisateur;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Set<Tache> getTaches() {
+		return taches;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setTaches(Set<Tache> taches) {
+		this.taches = taches;
 	}
 
-	public Tache getTache() {
-		return tache;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setTache(Tache tache) {
-		this.tache = tache;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	@Override
-	public String toString() {
-		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", email=" + email + ", nomUtilisateur=" + nomUtilisateur
-				+ ", prenomUtilisateur=" + prenomUtilisateur + "]";
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+	public Set<Role> getListRole() {
+		return listRole;
+	}
+
+	public void setListRole(Set<Role> listRole) {
+		this.listRole = listRole;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }

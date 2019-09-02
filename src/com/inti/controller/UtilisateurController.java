@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.inti.entities.Utilisateur;
 import com.inti.service.interfaces.IUtilisateurService;
@@ -21,17 +21,31 @@ public class UtilisateurController {
 	IUtilisateurService utilisateurService;
 	
 	@RequestMapping(value = "users", method = RequestMethod.GET)
-	public ModelAndView findAllUtilisateur() {
-		ModelAndView model = new ModelAndView("users");
-		List<Utilisateur> listUtilisateur = utilisateurService.findAll(Utilisateur.class);
-		model.addObject("listUtilisateur", listUtilisateur);
-		return model;
+	public List<Utilisateur> findAll() {
+		return utilisateurService.findAll(Utilisateur.class);
 	}
 	
-	@RequestMapping(value="save", method = RequestMethod.POST)
-	public ModelAndView saveUtilisateur(@ModelAttribute("u") Utilisateur utilisateur) {
-		utilisateurService.save(utilisateur);
-		return new ModelAndView("redirect:/users");
+	@RequestMapping(value="users", method = RequestMethod.POST)
+	public void saveUtilisateur(@RequestBody Utilisateur utilisateur) {
+		return;
+	}
+	
+	@RequestMapping(value="users/{idUtilisateur}", method= RequestMethod.PUT)
+	public Utilisateur updateUtilisateur(@PathVariable("idUtilisateur") Long idUtilisateur,@RequestBody Utilisateur utilisateur) {
+		Utilisateur currentUtilisateur = utilisateurService.findOne(Utilisateur.class, idUtilisateur);
+		currentUtilisateur.setNomUtilisateur(utilisateur.getNomUtilisateur());
+		currentUtilisateur.setPrenomUtilisateur(utilisateur.getPrenomUtilisateur());
+		currentUtilisateur.setUsername(utilisateur.getUsername());
+		currentUtilisateur.setPassword(utilisateur.getPassword());
+		currentUtilisateur.setDateNaissance(utilisateur.getDateNaissance());
+		currentUtilisateur.setListRole(utilisateur.getListRole());
+		//return utilisateurService.save(currentUtilisateur);
+		return currentUtilisateur;
+	}
+	
+	@RequestMapping(value="users/{idUtilisateur}", method = RequestMethod.GET)
+	public Utilisateur findOne(@PathVariable("idUtilisateur")Long idUtilisateur) {
+		return utilisateurService.findOne(Utilisateur.class, idUtilisateur);
 	}
 
 }

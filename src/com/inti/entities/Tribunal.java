@@ -30,14 +30,6 @@ public class Tribunal implements Serializable {
 	public Tribunal() {
 	}
 
-	public Tribunal(Long idTribunal, String adresse, Double fax, Double tel, String region, Tache tache) {
-		super();
-		this.idTribunal = idTribunal;
-		this.adresse = adresse;
-		this.fax = fax;
-		this.tel = tel;
-		this.region = region;
-	}
 
 	public Long getIdTribunal() {
 		return idTribunal;
@@ -85,12 +77,6 @@ public class Tribunal implements Serializable {
 
 	public void setListTache(Set<Tache> listTache) {
 		this.listTache = listTache;
-	}
-
-	@Override
-	public String toString() {
-		return "Tribunal [idTribunal=" + idTribunal + ", adresse=" + adresse + ", fax=" + fax + ", tel=" + tel
-				+ ", region=" + region + "]";
 	}
 
 }

@@ -31,14 +31,6 @@ public class Phase implements Serializable {
 	public Phase() {
 	}
 
-	public Phase(Long idPhase, String nom, Date dateDebut, Date dateFin, Tache tache) {
-		super();
-		this.idPhase = idPhase;
-		this.nom = nom;
-		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
-	}
-
 	public Long getIdPhase() {
 		return idPhase;
 	}
@@ -79,9 +71,5 @@ public class Phase implements Serializable {
 		this.tache = tache;
 	}
 
-	@Override
-	public String toString() {
-		return "Phase [idPhase=" + idPhase + ", nom=" + nom + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + "]";
-	}
 	
 }

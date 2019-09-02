@@ -41,15 +41,6 @@ public class Tache implements Serializable {
 	public Tache() {
 	}
 
-	public Tache(Long idTache, Date dateCreation, String titre, String description, boolean statutAudience,
-			Phase phase) {
-		super();
-		this.idTache = idTache;
-		this.dateCreation = dateCreation;
-		this.titre = titre;
-		this.description = description;
-		this.statutAudience = statutAudience;
-	}
 
 	public Long getIdTache() {
 		return idTache;
@@ -121,12 +112,6 @@ public class Tache implements Serializable {
 
 	public void setListPhase(Set<Phase> listPhase) {
 		this.listPhase = listPhase;
-	}
-
-	@Override
-	public String toString() {
-		return "Tache [idTache=" + idTache + ", dateCreation=" + dateCreation + ", titre=" + titre + ", description="
-				+ description + ", statutAudience=" + statutAudience + "]";
 	}
 
 }

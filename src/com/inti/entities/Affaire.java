@@ -29,12 +29,6 @@ public class Affaire implements Serializable {
 	public Affaire() {
 	}
 
-	public Affaire(Long idAffaire, String reference, Document document, Tache tache) {
-		super();
-		this.idAffaire = idAffaire;
-		this.reference = reference;
-	}
-
 	public Long getIdAffaire() {
 		return idAffaire;
 	}
@@ -67,9 +61,5 @@ public class Affaire implements Serializable {
 		this.listTache = listTache;
 	}
 
-	@Override
-	public String toString() {
-		return "Affaire [idAffaire=" + idAffaire + ", reference=" + reference + "]";
-	}
 
 }
